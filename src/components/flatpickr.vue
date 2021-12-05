@@ -1,10 +1,12 @@
 <template>
   <label>Select date</label>
-  <flat-pickr> </flat-pickr>
+  <div class="object-center">
+    <flatpickr :config="config"> </flatpickr>
+  </div>
 </template>
 
 <script>
-import flatpickr from "flatpickr";
+import flatpickr from "vue-flatpickr-component";
 
 export default {
   name: "DatePickr",
@@ -12,6 +14,9 @@ export default {
     return {
       date: null,
       dateFormat: "Y-m-d",
+      config: {
+        inline: true,
+      },
     };
   },
   components: {

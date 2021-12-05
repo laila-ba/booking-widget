@@ -12,11 +12,11 @@
         />
       </svg>
       <p class="text-xl pt-4">Select Your Service</p>
-      <!--
-      <div>
+
+      <div v-if="form.service">
         {{ services.find((service) => service.id === form.service).name }}
       </div>
-      -->
+
       <p>Step {{ step }}</p>
     </div>
 
@@ -52,9 +52,9 @@
         </div>
       </div>
 
-      <div v-if="step === 2">
+      <div class="box-border w-96 p-4 border-4 mx-auto" v-if="step === 2">
         <h1>Pick a Date and Time</h1>
-        <flatpickr> </flatpickr>
+        <flatpickr class="pl-4"> </flatpickr>
       </div>
 
       <div v-if="step === 3">step3</div>
@@ -105,6 +105,7 @@
 
 <script>
 import flatpickr from "./components/flatpickr.vue";
+import "flatpickr/dist/flatpickr.css";
 
 export default {
   name: "App",
