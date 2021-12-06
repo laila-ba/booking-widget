@@ -18,6 +18,10 @@
       </div>
 
       <p>Step {{ step }}</p>
+      <div v-if="step === 3">
+        {{ date }}
+        {{ time }}
+      </div>
     </div>
 
     <div class="w-3/4 justify-between">
@@ -58,7 +62,8 @@
       >
         <h1 class="text-2xl">Pick a Date and Time</h1>
         <div class="pl-4 ml-32 mt-5">
-          <flatpickr> </flatpickr>
+          <Datepickr v-model="date"> </Datepickr>
+          <Timepickr v-model="time"> </Timepickr>
         </div>
       </div>
 
@@ -103,13 +108,16 @@
 </template>
 
 <script>
-import flatpickr from "./components/flatpickr.vue";
+import Datepickr from "./components/Datepickr.vue";
+import Timepickr from "./components/Timepickr.vue";
 import "flatpickr/dist/flatpickr.css";
 
 export default {
   name: "App",
   data() {
     return {
+      date: null,
+      time: null,
       form: {
         service: null,
       },
@@ -132,12 +140,11 @@ export default {
         </svg>`,
         },
       ],
-
-      showDate: false,
     };
   },
   components: {
-    flatpickr,
+    Datepickr,
+    Timepickr,
   },
   computed: {},
   methods: {

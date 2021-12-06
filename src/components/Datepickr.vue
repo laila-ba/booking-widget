@@ -1,7 +1,12 @@
 <template>
   <label>Select date</label>
   <div class="mx-auto">
-    <flatpickr :config="config"> </flatpickr>
+    <flatpickr
+      :config="config"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
+    >
+    </flatpickr>
   </div>
 </template>
 
@@ -9,14 +14,16 @@
 import flatpickr from "vue-flatpickr-component";
 
 export default {
-  name: "DatePickr",
+  name: "datepickr",
+  props: ["modelValue"],
+  emits: ["update:modelValue"],
+
   data() {
     return {
       date: null,
       dateFormat: "Y-m-d",
       config: {
         inline: true,
-        enableTime: true,
         minDate: "today",
       },
     };
