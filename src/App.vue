@@ -52,25 +52,30 @@
         </div>
       </div>
 
-      <div class="box-border w-96 p-4 border-4 mx-auto" v-if="step === 2">
-        <h1>Pick a Date and Time</h1>
-        <flatpickr class="pl-4"> </flatpickr>
+      <div
+        class="box-border w-2/4 h-full p-4 border-4 mx-auto"
+        v-if="step === 2"
+      >
+        <h1 class="text-2xl">Pick a Date and Time</h1>
+        <div class="pl-4 ml-32 mt-5">
+          <flatpickr> </flatpickr>
+        </div>
       </div>
 
       <div v-if="step === 3">step3</div>
 
       <div v-if="step === 4">step4</div>
 
-      <div>
+      <div class="mt-8">
         <button
           class="
-            bg-blue-500
-            hover:bg-orange-700
+            bg-yellow-600
+            hover:bg-yellow-700
             text-white
             font-bold
             py-2
             px-4
-            rounded
+            rounded-full
           "
           @click="next"
           v-if="step < 4"
@@ -79,25 +84,19 @@
         </button>
         <button
           class="
-            bg-transparent
-            hover:bg-orange-500
-            text-blue-700
-            font-semibold
-            hover:text-white
+            bg-yellow-600
+            hover:bg-yellow-700
+            text-white
+            font-bold
             py-2
             px-4
-            border border-blue-500
-            hover:border-transparent
-            rounded
+            rounded-full
           "
           @click="prev"
           v-if="step > 1"
         >
           Back
         </button>
-        <pre>
-          {{ form }}
-        </pre>
       </div>
     </div>
   </div>

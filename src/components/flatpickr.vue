@@ -1,6 +1,6 @@
 <template>
   <label>Select date</label>
-  <div class="object-center">
+  <div class="mx-auto">
     <flatpickr :config="config"> </flatpickr>
   </div>
 </template>
@@ -16,6 +16,8 @@ export default {
       dateFormat: "Y-m-d",
       config: {
         inline: true,
+        enableTime: true,
+        minDate: "today",
       },
     };
   },
