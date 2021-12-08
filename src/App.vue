@@ -105,7 +105,7 @@
         <h1 class="text-2xl">Pick a Date and Time</h1>
         <div class="p-4 mt-5">
           <Datepickr v-model="date"> </Datepickr>
-          <Timepickr v-model="time"> </Timepickr>
+          <Timepickr v-model="fromTime"> </Timepickr>
         </div>
       </div>
 
@@ -160,7 +160,7 @@
           </div>
           <div class="date bg-gray-300 bg-opacity-25 m-4 text-left p-4">
             <p class="text-gray-500 text-xs mb-2">TIME</p>
-            <strong>{{ time }}</strong>
+            <strong>{{ fromTime }}</strong>
           </div>
         </div>
       </div>
@@ -181,7 +181,7 @@ export default {
     return {
       date: null,
       fromTime: null,
-      toTime: this.fromTime++,
+      // toTime: this.fromTime++,
       form: {
         service: null,
       },
@@ -214,7 +214,18 @@ export default {
     Timepickr,
     BookingForm,
   },
-  computed: {},
+  computed: {
+    toTime: {
+      get: function () {
+          var x = this.fromTime
+          var y = x?x.split(/:/):[]
+          y[0]++
+          y = `${y[0]+':'+y[1]}`
+         return y;
+    },
+        
+    }
+  },
   methods: {
     captureFormData(e) {
       this.formData = e;
