@@ -10,8 +10,11 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "vue": "^3.0.0",
+    "vue-country-region-select": "^2.0.16",
     "vue-flatpickr-component": "^9.0.5",
-    "vue-step-progress": "^0.3.7"
+    "vue-form-components": "^2.2.0",
+    "vue-step-progress": "^0.3.7",
+    "vue3-country-region-select": "^1.0.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

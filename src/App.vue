@@ -1,6 +1,6 @@
 <template>
-  <div class="flex w-full">
-    <div class="my-5 px-5 w-1/4 overflow-hidden">
+  <div class="flex w-full grid place-items-center">
+    <div v-if="step < 4" class="my-5 px-5 w-1/4 overflow-hidden border-2">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="h-12 w-12 m-auto"
@@ -11,22 +11,64 @@
           d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"
         />
       </svg>
-      <p class="text-xl pt-4">Select Your Service</p>
+      <p class="text-2xl pt-4">Select Your Service</p>
 
       <div v-if="form.service">
-        {{ services.find((service) => service.id === form.service).name }}
+        <strong>{{
+          services.find((service) => service.id === form.service).name
+        }}</strong>
       </div>
 
       <p>Step {{ step }}</p>
       <div v-if="step === 3">
-        {{ date }}
-        {{ time }}
+        <div class="date bg-gray-300 bg-opacity-25 m-4 text-center p-4">
+          <p class="text-gray-500 text-xs mb-2">DATE</p>
+          <strong>{{ date }}</strong>
+        </div>
+        <div class="date bg-gray-300 bg-opacity-25 m-4 text-center p-4">
+          <p class="text-gray-500 text-xs mb-2">TIME</p>
+          <strong>{{ fromTime }}-{{ toTime }}</strong>
+        </div>
+      </div>
+      <div v-if="step > 1 && step < 4" class="mt-8">
+        <button
+          class="
+            bg-yellow-600
+            hover:bg-yellow-700
+            text-white
+            font-bold
+            py-2
+            px-4
+            mb-4
+            rounded-full
+          "
+          @click="next"
+          v-if="step == 2"
+        >
+          Next
+        </button>
+        <button
+          class="
+            bg-yellow-600
+            hover:bg-yellow-700
+            text-white
+            font-bold
+            py-2
+            px-4
+            mb-4
+            rounded-full
+            ml-4
+          "
+          @click="prev"
+          v-if="step > 1"
+        >
+          Back
+        </button>
       </div>
     </div>
 
     <div class="w-3/4 justify-between">
       <div v-if="step === 1">
-        <h1 class="text-2xl pb-10">Select your Service</h1>
         <div
           class="
             justify-between
@@ -61,47 +103,66 @@
         v-if="step === 2"
       >
         <h1 class="text-2xl">Pick a Date and Time</h1>
-        <div class="pl-4 ml-32 mt-5">
+        <div class="p-4 mt-5">
           <Datepickr v-model="date"> </Datepickr>
           <Timepickr v-model="time"> </Timepickr>
         </div>
       </div>
 
-      <div v-if="step === 3">step3</div>
+      <div v-if="step === 3">
+        <div class="mx-auto w-2/4">
+          <BookingForm @next="next" @form="captureFormData"> </BookingForm>
+        </div>
+      </div>
 
-      <div v-if="step === 4">step4</div>
-
-      <div class="mt-8">
-        <button
-          class="
-            bg-yellow-600
-            hover:bg-yellow-700
-            text-white
-            font-bold
-            py-2
-            px-4
-            rounded-full
-          "
-          @click="next"
-          v-if="step < 4"
+      <div v-if="step === 4">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-24 w-24 mx-auto"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="orange"
         >
-          Next
-        </button>
-        <button
-          class="
-            bg-yellow-600
-            hover:bg-yellow-700
-            text-white
-            font-bold
-            py-2
-            px-4
-            rounded-full
-          "
-          @click="prev"
-          v-if="step > 1"
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M5 13l4 4L19 7"
+          />
+        </svg>
+        <h1 class="text-3xl mb-8">Booking Successful!</h1>
+        <p>
+          Thanks for your booking. One of our consultants will contact you soon.
+        </p>
+        <div v-if="form.service">
+          <h3 class="mt-8">
+            <strong>{{
+              services.find((service) => service.id === form.service).name
+            }}</strong>
+          </h3>
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-7 w-7 mx-auto mb-8"
+          viewBox="0 0 20 20"
+          fill="orange"
         >
-          Back
-        </button>
+          <path
+            fill-rule="evenodd"
+            d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+            clip-rule="evenodd"
+          />
+        </svg>
+        <div class="flex-none inline-flex">
+          <div class="date bg-gray-300 bg-opacity-25 m-4 text-left p-4">
+            <p class="text-gray-500 text-xs mb-2">DATE</p>
+            <strong>{{ date }}</strong>
+          </div>
+          <div class="date bg-gray-300 bg-opacity-25 m-4 text-left p-4">
+            <p class="text-gray-500 text-xs mb-2">TIME</p>
+            <strong>{{ time }}</strong>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -110,6 +171,8 @@
 <script>
 import Datepickr from "./components/Datepickr.vue";
 import Timepickr from "./components/Timepickr.vue";
+import BookingForm from "./components/Form.vue";
+//import Vue from "vue";
 import "flatpickr/dist/flatpickr.css";
 
 export default {
@@ -117,10 +180,14 @@ export default {
   data() {
     return {
       date: null,
-      time: null,
+      fromTime: null,
+      toTime: this.fromTime++,
       form: {
         service: null,
       },
+      formData: {},
+      //bus: new Vue(),
+
       step: 1,
       services: [
         {
@@ -145,11 +212,24 @@ export default {
   components: {
     Datepickr,
     Timepickr,
+    BookingForm,
   },
   computed: {},
   methods: {
+    captureFormData(e) {
+      this.formData = e;
+    },
     next() {
       this.step++;
+      //if (this.step == 1) {
+      //this.step++;
+      // }
+      // if (this.step == 2) {
+      //   this.step++;
+      // }
+      // if (this.step == 3) {
+      //   this.step++;
+      // }
     },
     prev() {
       this.step--;
@@ -163,6 +243,25 @@ export default {
 </script>
 
 <style>
+[type="text"],
+[type="email"],
+textarea,
+select {
+  padding: 10px;
+  margin: 10px;
+  /* a: left; */
+  background-color: #fff;
+  border-color: #d1d5db !important;
+  border-width: 1px !important;
+  border-radius: 5px !important;
+}
+
+.flatpickr-calendar {
+  margin: 0 auto;
+}
+.flatpickr-calendar.inline {
+  position: relative !important;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -188,5 +287,8 @@ export default {
   max-width: 300px;
   height: 300px;
   margin-left: 5rem;
+}
+.date {
+  min-width: 10rem;
 }
 </style>

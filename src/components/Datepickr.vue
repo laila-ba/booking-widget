@@ -1,5 +1,4 @@
 <template>
-  <label>Select date</label>
   <div class="mx-auto">
     <flatpickr
       :config="config"
@@ -21,8 +20,8 @@ export default {
   data() {
     return {
       date: null,
-      dateFormat: "Y-m-d",
       config: {
+        dateFormat: "D-F-j-Y",
         inline: true,
         minDate: "today",
       },
