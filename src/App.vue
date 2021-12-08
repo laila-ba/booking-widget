@@ -218,7 +218,7 @@ export default {
     toTime: {
       get: function () {
           var x = this.fromTime
-          var y = x?x.split(/:/):[]
+          var y = x ? x.split(/:/) : []
           y[0]++
           y = `${y[0]+':'+y[1]}`
          return y;
