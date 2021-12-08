@@ -21,7 +21,7 @@ export default {
     return {
       date: null,
       config: {
-        dateFormat: "D-F-j-Y",
+        dateFormat: "Y-m-d",
         inline: true,
         minDate: "today",
       },

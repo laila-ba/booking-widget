@@ -23,7 +23,7 @@
       <div v-if="step === 3">
         <div class="date bg-gray-300 bg-opacity-25 m-4 text-center p-4">
           <p class="text-gray-500 text-xs mb-2">DATE</p>
-          <strong>{{ date }}</strong>
+          <strong>{{newDate}}</strong>
         </div>
         <div class="date bg-gray-300 bg-opacity-25 m-4 text-center p-4">
           <p class="text-gray-500 text-xs mb-2">TIME</p>
@@ -156,7 +156,7 @@
         <div class="flex-none inline-flex">
           <div class="date bg-gray-300 bg-opacity-25 m-4 text-left p-4">
             <p class="text-gray-500 text-xs mb-2">DATE</p>
-            <strong>{{ date }}</strong>
+            <strong>{{newDate}}</strong>
           </div>
           <div class="date bg-gray-300 bg-opacity-25 m-4 text-left p-4">
             <p class="text-gray-500 text-xs mb-2">TIME</p>
@@ -224,6 +224,17 @@ export default {
          return y;
     },
         
+    },
+    newDate : {
+      get: function(){
+         
+        const date = new Date(this.date)
+        // Then specify how you want your dates to be formatted
+        return new Intl.DateTimeFormat("default", { dateStyle: "long" }).format(
+            date
+        )
+  
+      }
     }
   },
   methods: {
@@ -249,6 +260,14 @@ export default {
       this.form.service = service.id;
       this.next();
     },
+
+    formatDate(dateString) {
+        const date = new Date(dateString)
+        // Then specify how you want your dates to be formatted
+        return new Intl.DateTimeFormat("default", { dateStyle: "long" }).format(
+            date
+        )
+    }
   },
 };
 </script>
