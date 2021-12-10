@@ -6,8 +6,11 @@
       <li v-for="(error,key) in errors" :key="key">{{ error }}</li>
     </ul>
   </p>
-  <div class="form my-8 border-4 p-8 mx-auto">
-    <h1 class="text-2xl mb-8">Enter Your Details</h1>
+  <div class="form my-8  p-8 mx-auto">
+    <div class="w-full text-2xl text-left mt-8 ml-8">
+          <h2>Enter Your Details</h2>
+          <hr class="w-52 mt-4 mb-8" />
+        </div>
     <div>
       <label for="name" class="block text-xs text-gray-900 font-medium"
         >Name</label
@@ -107,8 +110,9 @@
         >Country:</label
       >
       <country-select
+      v-model="form.country"
         class="p-4 m-4"
-        :country="country"
+        :country="form.country"
         topCountry="US"
       />
     </div>
@@ -116,18 +120,17 @@
       <button
         type="submit"
         class="
-          bg-yellow-600
-          hover:bg-yellow-700
+          color
           text-white
-          font-bold
           py-2
           px-4
-          rounded-full
           ml-4
+          w-full
+          mt-4
         "
         @click="submitBooking()"
       >
-        Book
+        Book Appointment
       </button>
     </div>
   </div>
@@ -182,6 +185,9 @@ export default {
 <style scoped>
 .form {
   text-align: left;
+}
+.color{
+  background: rgb(184, 49, 47);
 }
 </style>
 -->
